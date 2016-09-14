@@ -16,26 +16,24 @@ and open the template in the editor.
         <script>
 
                     angular.module("app", [])
-                            .controller("indexCtr", function ($http, $window, $scope) {
 
+                            .controller("indexCtr", ["$http", "$window", "$scope", function ($http, $window, $scope) {
+                                    $window.onbeforeunload = function (e) {
+                                        // Simple GET request example:
+                                        $http({
+                                            method: 'GET',
+                                            url: 'api.jsp'
+                                        }).then(function successCallback(response) {
+                                            // this callback will be called asynchronously
+                                            // when the response is available
+                                        }, function errorCallback(response) {
+                                            console.log(response);
+                                        });
+                                        
+                                        return "";
 
-
-                                $window.onbeforeunload = function (event) {
-                                    // Simple GET request example:
-                                    $http({
-                                        method: 'GET',
-                                        url: 'api.jsp'
-                                    }).then(function successCallback(response) {
-                                        // this callback will be called asynchronously
-                                        // when the response is available
-                                    }, function errorCallback(response) {
-                                        console.log(response);
-                                    });
-                                    return '';
-                                }
-
-                            });
-
+                                    };
+                                }]);
 
         </script>
 
